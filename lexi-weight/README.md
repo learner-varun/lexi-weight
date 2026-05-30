@@ -18,23 +18,28 @@ Each letter of the alphabet is assigned a numerical weight, and players must str
 ## 🕹️ How to Play
 
 ### The Objective
-- Your primary goal is to form a single, valid English word.
-- The total "weight" of the letters in your word must exactly match the **Required Weight** displayed at the top of the screen.
+- Your primary goal is to form a single, valid English word before the timer runs out.
+- **The lighter, the better!** Your goal is to use letters with the lowest possible weights to maximize your score.
 - Each letter has a specific assigned numerical weight (e.g., A=1, B=2, Z=26) which is shown on the letter tile itself.
 
 ### Rules of Engagement
-- **Pre-placed Letters**: Some levels give you a mandatory letter already placed on the board. You *must* build your word around it. The weight of this pre-placed letter is automatically counted toward your target!
-- **Placing Letters**: You can place letters onto the board by:
+- **Required Letters:** Levels provide mandatory letters that you MUST include.
+- **Strict Placement:** As levels get harder, you must place these letters in specific, rigid positions (e.g., the 2nd required letter MUST go in Position 2 or 3).
+- **Placing Letters:** You can place letters onto the board by:
   - Dragging a letter tile from the bank to a slot on the board.
   - Clicking a letter tile in the bank.
   - Typing the letter on your physical keyboard.
-- **Removing Letters**: Made a mistake? Click a placed letter on the board to return it to the bank, or press `Backspace` on your keyboard.
-- **Time Limit**: You are racing against a timer! The timer bar at the top indicates how much time you have left to submit a valid word.
+- **Removing Letters:** Made a mistake? Click a placed letter on the board to return it to the bank, or press `Backspace` on your keyboard.
 
-### Winning and Losing
+### Scoring & Winning
 - When you are ready, click **Submit** (or press `Enter` on your keyboard).
-- **You win if:** Your word is a valid English word (verified via dictionary API) AND its total weight exactly matches the target weight.
-- **You lose if:** The timer runs out, your word is not a valid English word, or the total weight of your word does not equal the target weight.
+- **Winning:** You win the level if your word is a valid English word (verified via dictionary API) AND all required letters are in valid positions.
+- **Scoring System:** 
+  - Every level gives a **Base Reward**.
+  - The combined weight of all the letters you added is **subtracted** from this reward. (Pre-placed letters don't penalize you!)
+  - You receive a **Time Bonus** for every second remaining on the clock (+2 points/sec).
+  - **Formula:** `Score = Base Reward - Added Letter Weights + Time Bonus`
+- **Losing:** You lose if the timer runs out, your word is invalid, or required letters are placed incorrectly.
 
 ## 🛠️ Tech Stack
 

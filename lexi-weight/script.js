@@ -142,7 +142,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        const helpBtn = document.getElementById('help-btn');
+        if (helpBtn) {
+            helpBtn.addEventListener('click', showRulesModal);
+        }
+
         startLevel(1);
+
+        if (!localStorage.getItem('lexiWeightRulesSeen')) {
+            localStorage.setItem('lexiWeightRulesSeen', 'true');
+            showRulesModal();
+        }
     }
 
     function createLetterElement(char) {
@@ -592,6 +602,45 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.textContent = "Forge Word";
             submitBtn.disabled = false;
         }
+    }
+
+    function showRulesModal() {
+        clearInterval(timerInterval);
+        
+        const rulesHTML = `
+            <div style="text-align: left; font-size: 0.95rem; line-height: 1.5; padding: 1rem; color: var(--text-color); max-height: 60vh; overflow-y: auto;">
+                <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">🎯 The Objective</h3>
+                <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                    <li>Form a <strong>valid English word</strong> before the timer runs out.</li>
+                    <li><strong>The lighter, the better!</strong> Your goal is to use letters with the lowest possible weights to maximize your score.</li>
+                </ul>
+                <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">📜 Placement Rules</h3>
+                <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                    <li><strong>Required Letters:</strong> Levels provide mandatory letters that you MUST include.</li>
+                    <li><strong>Strict Placement:</strong> As levels get harder, you must place these letters in specific positions:
+                        <ul style="margin-left: 1.5rem; margin-top: 0.25rem; font-size: 0.9em; opacity: 0.9; margin-bottom: 0.5rem;">
+                            <li><strong>1st Letter:</strong> Always at Position 1.</li>
+                            <li><strong>2nd Letter:</strong> Must be at Position 2 or 3.</li>
+                            <li><strong>3rd Letter:</strong> Must be at Position 3 or 4.</li>
+                            <li><strong>4th Letter:</strong> Must be at Position 4 or 5.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Controls:</strong> Drag & drop, click, or type on your keyboard. Press <code>Backspace</code> to delete.</li>
+                </ul>
+                <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">💰 Scoring & Weights</h3>
+                <ul style="margin-left: 1.5rem; margin-bottom: 0.5rem;">
+                    <li>Every level gives a <strong>Base Reward</strong> (e.g. 100 points for Level 1).</li>
+                    <li>The combined weight of all the letters you added is <strong>subtracted</strong> from this reward. (Pre-placed letters don't penalize you).</li>
+                    <li><strong>Time Bonus:</strong> Every remaining second adds +2 points to your score.</li>
+                    <li><strong>Formula:</strong> <code>Score = Base Reward - Added Letter Weights + Time Bonus</code></li>
+                </ul>
+            </div>
+        `;
+        showModal("How to Play", rulesHTML, "Got It!", () => {
+            if (!isGameOver) {
+                startTimer();
+            }
+        });
     }
 
     function triggerShake(element) {
