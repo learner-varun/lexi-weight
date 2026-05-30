@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let timeRemaining = 30;
     let requiredLetters = [];
     let isGameOver = false;
+    let winStreak = 0;
 
     // Constants
     const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -438,6 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "Restart", 
             () => {
                 score = 0;
+                winStreak = 0;
                 document.getElementById('score-list').innerHTML = '';
                 document.getElementById('side-total-score').textContent = '0';
                 startLevel(1);
@@ -455,6 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "Restart", 
             () => {
                 score = 0;
+                winStreak = 0;
                 document.getElementById('score-list').innerHTML = '';
                 document.getElementById('side-total-score').textContent = '0';
                 startLevel(1);
@@ -580,6 +583,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.innerHTML = `Level ${currentLevel} <span>${levelScore}</span>`;
                 document.getElementById('score-list').appendChild(li);
                 document.getElementById('side-total-score').textContent = score;
+                winStreak++;
+                if (window.posthog) {
+                    posthog.capture('Level Passed', {
+                        level: currentLevel,
+                        word: word,
+                        score_earned: levelScore,
+                        win_streak: winStreak
+                    });
+                }
 
                 showModal(
                     "Level Complete! <span class='badge success'>Success</span>", 
