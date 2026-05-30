@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexiWeight - The Word Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout-wrapper">
+        <div class="app-container">
+        <!-- Header / Weight Table -->
+        <header>
+            <div class="stats">
+                <div class="stat-pill custom-select" id="custom-level-select">
+                    <div class="select-selected">Level 1 (Easy)</div>
+                    <div class="select-items select-hide">
+                        <div data-val="1">Level 1 (Easy)</div>
+                        <div data-val="2">Level 2 (Medium)</div>
+                        <div data-val="3">Level 3 (Hard)</div>
+                    </div>
+                </div>
+                
+                <div class="theme-controls" style="display: flex; gap: 1rem; align-items: center;">
+                    <button id="base-theme-toggle" class="fancy-btn small" style="padding: 0.3rem 0.8rem; font-size: 0.9rem; min-width: 100px;">Light Mode</button>
+                    <div class="theme-selector">
+                        <div class="theme-btn active" data-color-theme="default" style="background: linear-gradient(45deg, #00ffcc, #ff007f)" title="Cyberpunk"></div>
+                        <div class="theme-btn" data-color-theme="purple" style="background: linear-gradient(45deg, #bc13fe, #00e676)" title="Neon"></div>
+                        <div class="theme-btn" data-color-theme="fire" style="background: linear-gradient(45deg, #ffaa00, #ff3d00)" title="Fire"></div>
+                        <div class="theme-btn" data-color-theme="ocean" style="background: linear-gradient(45deg, #00bfff, #8a2be2)" title="Ocean"></div>
+                        <div class="theme-btn" data-color-theme="toxic" style="background: linear-gradient(45deg, #39ff14, #fce803)" title="Toxic"></div>
+                    </div>
+                </div>
+
+                <div class="stat-pill">Score <span id="score-display">0</span></div>
+            </div>
+            
+            <div class="weight-table-container">
+                <button id="toggle-weights" class="fancy-btn small">Toggle Weight Table</button>
+                <div id="weight-table" class="weight-table hidden">
+                    <!-- JS will populate A=1 to Z=26 -->
+                </div>
+            </div>
+        </header>
+
+        <!-- Timer -->
+        <div class="timer-container">
+            <div id="timer-bar" class="timer-bar"></div>
+        </div>
+
+        <!-- Main Game Area -->
+        <main>
+            <div class="rules-box">
+                <h3>Current Rules</h3>
+                <p id="rules-text">Level 1: Loading...</p>
+                <div id="required-letters-display" class="required-letters"></div>
+            </div>
+
+            <!-- The Word Slots -->
+            <div class="game-board" id="game-board">
+                <!-- 8 slots for creating the word -->
+                <div class="slot" data-index="1"></div>
+                <div class="slot" data-index="2"></div>
+                <div class="slot" data-index="3"></div>
+                <div class="slot" data-index="4"></div>
+                <div class="slot" data-index="5"></div>
+                <div class="slot" data-index="6"></div>
+                <div class="slot" data-index="7"></div>
+                <div class="slot" data-index="8"></div>
+            </div>
+
+            <div class="controls">
+                <button id="submit-btn" class="fancy-btn primary">Forge Word</button>
+                <button id="clear-btn" class="fancy-btn secondary">Clear Board</button>
+            </div>
+
+            <!-- Letter Bank -->
+            <div class="letter-bank" id="letter-bank">
+                <!-- JS will populate A-Z -->
+            </div>
+        </main>
+        </div>
+
+        <aside class="scoreboard-panel">
+            <h2>Scoreboard</h2>
+            <ul id="score-list">
+                <!-- Scores injected via JS -->
+            </ul>
+            <div class="total-score-box">
+                Total Score <span id="side-total-score">0</span>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Modals -->
+    <div id="overlay" class="overlay hidden"></div>
+    <div id="modal" class="modal hidden">
+        <h2 id="modal-title">Level Complete!</h2>
+        <p id="modal-desc">Word weight: 42</p>
+        <button id="modal-action-btn" class="fancy-btn primary">Next Level</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
