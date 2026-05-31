@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,101 +10,108 @@
     <link rel="stylesheet" href="style.css">
     <!-- PostHog Analytics -->
     <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
         posthog.init('phc_psk7GwWBCHoKLmATsoF5QCmY4Na2gjkz8EKfRp7UxyqV', {
             api_host: 'https://us.i.posthog.com',
-            person_profiles: 'always' 
+            person_profiles: 'always'
         })
     </script>
 </head>
+
 <body>
     <div class="layout-wrapper">
         <div class="app-container">
-        <!-- Sticky Level Select -->
-        <div style="position: sticky; top: 1rem; z-index: 60; display: flex; justify-content: center; width: 100%; margin-bottom: 1rem; pointer-events: none;">
-            <div class="stat-pill custom-select" id="custom-level-select" style="pointer-events: auto;">
-                <div class="select-selected">Level 1 (Easy)</div>
-                <div class="select-items select-hide">
-                    <div data-val="1">Level 1 (Easy)</div>
-                    <div data-val="2">Level 2 (Medium)</div>
-                    <div data-val="3">Level 3 (Hard)</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Header / Weight Table -->
-        <header>
-            <div class="stats">
-
-                
-                <div class="theme-controls">
-                    <button id="base-theme-toggle" class="fancy-btn small base-theme-toggle-btn">Light Mode</button>
-                    <div class="theme-selector">
-                        <div class="theme-btn active" data-color-theme="default" style="background: linear-gradient(45deg, #00ffcc, #ff007f)" title="Cyberpunk"></div>
-                        <div class="theme-btn" data-color-theme="purple" style="background: linear-gradient(45deg, #bc13fe, #00e676)" title="Neon"></div>
-                        <div class="theme-btn" data-color-theme="fire" style="background: linear-gradient(45deg, #ffaa00, #ff3d00)" title="Fire"></div>
-                        <div class="theme-btn" data-color-theme="ocean" style="background: linear-gradient(45deg, #00bfff, #8a2be2)" title="Ocean"></div>
-                        <div class="theme-btn" data-color-theme="toxic" style="background: linear-gradient(45deg, #39ff14, #fce803)" title="Toxic"></div>
+            <!-- Sticky Level Select -->
+            <div
+                style="position: sticky; top: 1rem; z-index: 60; display: flex; justify-content: center; width: 100%; margin-bottom: 1rem; pointer-events: none;">
+                <div class="stat-pill custom-select" id="custom-level-select" style="pointer-events: auto;">
+                    <div class="select-selected">Level 1 (Easy)</div>
+                    <div class="select-items select-hide">
+                        <div data-val="1">Level 1 (Easy)</div>
+                        <div data-val="2">Level 2 (Medium)</div>
+                        <div data-val="3">Level 3 (Hard)</div>
                     </div>
                 </div>
-
-                <div class="stat-pill">Score <span id="score-display">0</span></div>
             </div>
-            
-            <div class="weight-table-container">
-                <div class="weight-controls">
-                    <button id="help-btn" class="fancy-btn small primary">📖 Tutorial</button>
-                    <button id="toggle-weights" class="fancy-btn small">Toggle Weight Table</button>
+
+            <!-- Header / Weight Table -->
+            <header>
+                <div class="stats">
+
+
+                    <div class="theme-controls">
+                        <button id="base-theme-toggle" class="fancy-btn small base-theme-toggle-btn">Light Mode</button>
+                        <div class="theme-selector">
+                            <div class="theme-btn active" data-color-theme="default"
+                                style="background: linear-gradient(45deg, #00ffcc, #ff007f)" title="Cyberpunk"></div>
+                            <div class="theme-btn" data-color-theme="purple"
+                                style="background: linear-gradient(45deg, #bc13fe, #00e676)" title="Neon"></div>
+                            <div class="theme-btn" data-color-theme="fire"
+                                style="background: linear-gradient(45deg, #ffaa00, #ff3d00)" title="Fire"></div>
+                            <div class="theme-btn" data-color-theme="ocean"
+                                style="background: linear-gradient(45deg, #00bfff, #8a2be2)" title="Ocean"></div>
+                            <div class="theme-btn" data-color-theme="toxic"
+                                style="background: linear-gradient(45deg, #39ff14, #fce803)" title="Toxic"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-pill">Score <span id="score-display">0</span></div>
                 </div>
-                <div id="weight-table" class="weight-table hidden">
-                    <!-- JS will populate A=1 to Z=26 -->
+
+                <div class="weight-table-container">
+                    <div class="weight-controls">
+                        <button id="help-btn" class="fancy-btn small primary">📖 Tutorial</button>
+                        <button id="toggle-weights" class="fancy-btn small">Toggle Weight Table</button>
+                    </div>
+                    <div id="weight-table" class="weight-table hidden">
+                        <!-- JS will populate A=1 to Z=26 -->
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
 
-        <!-- Timer -->
-        <div class="timer-container">
-            <div id="timer-bar" class="timer-bar"></div>
-        </div>
-
-        <!-- Main Game Area -->
-        <main>
-            <div class="rules-box">
-                <h3>Current Rules</h3>
-                <p id="rules-text">Level 1: Loading...</p>
-                <div id="required-letters-display" class="required-letters"></div>
+            <!-- Timer -->
+            <div class="timer-container">
+                <div id="timer-bar" class="timer-bar"></div>
             </div>
 
-            <!-- The Word Slots -->
-            <div class="game-board" id="game-board">
-                <!-- 15 slots for creating the word -->
-                <div class="slot" data-index="1"></div>
-                <div class="slot" data-index="2"></div>
-                <div class="slot" data-index="3"></div>
-                <div class="slot" data-index="4"></div>
-                <div class="slot" data-index="5"></div>
-                <div class="slot" data-index="6"></div>
-                <div class="slot" data-index="7"></div>
-                <div class="slot" data-index="8"></div>
-                <div class="slot" data-index="9"></div>
-                <div class="slot" data-index="10"></div>
-                <div class="slot" data-index="11"></div>
-                <div class="slot" data-index="12"></div>
-                <div class="slot" data-index="13"></div>
-                <div class="slot" data-index="14"></div>
-                <div class="slot" data-index="15"></div>
-            </div>
+            <!-- Main Game Area -->
+            <main>
+                <div class="rules-box">
+                    <h3>Current Rules</h3>
+                    <p id="rules-text">Level 1: Loading...</p>
+                    <div id="required-letters-display" class="required-letters"></div>
+                </div>
 
-            <div class="controls">
-                <button id="submit-btn" class="fancy-btn primary">Forge Word</button>
-                <button id="clear-btn" class="fancy-btn secondary">Clear Board</button>
-            </div>
+                <!-- The Word Slots -->
+                <div class="game-board" id="game-board">
+                    <!-- 15 slots for creating the word -->
+                    <div class="slot" data-index="1"></div>
+                    <div class="slot" data-index="2"></div>
+                    <div class="slot" data-index="3"></div>
+                    <div class="slot" data-index="4"></div>
+                    <div class="slot" data-index="5"></div>
+                    <div class="slot" data-index="6"></div>
+                    <div class="slot" data-index="7"></div>
+                    <div class="slot" data-index="8"></div>
+                    <div class="slot" data-index="9"></div>
+                    <div class="slot" data-index="10"></div>
+                    <div class="slot" data-index="11"></div>
+                    <div class="slot" data-index="12"></div>
+                    <div class="slot" data-index="13"></div>
+                    <div class="slot" data-index="14"></div>
+                    <div class="slot" data-index="15"></div>
+                </div>
 
-            <!-- Letter Bank -->
-            <div class="letter-bank" id="letter-bank">
-                <!-- JS will populate A-Z -->
-            </div>
-        </main>
+                <div class="controls">
+                    <button id="submit-btn" class="fancy-btn primary">Forge Word</button>
+                    <button id="clear-btn" class="fancy-btn secondary">Clear Board</button>
+                </div>
+
+                <!-- Letter Bank -->
+                <div class="letter-bank" id="letter-bank">
+                    <!-- JS will populate A-Z -->
+                </div>
+            </main>
         </div>
 
         <aside class="scoreboard-panel">
@@ -117,6 +125,11 @@
         </aside>
     </div>
 
+    <footer class="site-footer">
+        Developed & maintained by Varun PK | Suggestions? Email: <a
+            href="mailto:learnngzoneofvarun@gmail.com">learnngzoneofvarun@gmail.com</a>
+    </footer>
+
     <!-- Modals -->
     <div id="overlay" class="overlay hidden"></div>
     <div id="modal" class="modal hidden">
@@ -127,4 +140,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
