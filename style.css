@@ -394,10 +394,12 @@ main {
 /* Game Board */
 .game-board {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 0.5rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     padding: 0.5rem;
+    padding-bottom: 1.5rem;
     background: var(--board-bg);
     border-radius: 12px;
     border: 1px dashed var(--glass-border);
@@ -406,6 +408,7 @@ main {
 .slot {
     width: 50px;
     height: 60px;
+    flex-shrink: 0;
     background: var(--slot-bg);
     border: 2px dashed rgba(255,255,255,0.2);
     border-radius: 12px;

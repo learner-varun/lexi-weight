@@ -19,17 +19,22 @@
 <body>
     <div class="layout-wrapper">
         <div class="app-container">
+        <!-- Sticky Level Select -->
+        <div style="position: sticky; top: 1rem; z-index: 60; display: flex; justify-content: center; width: 100%; margin-bottom: 1rem; pointer-events: none;">
+            <div class="stat-pill custom-select" id="custom-level-select" style="pointer-events: auto;">
+                <div class="select-selected">Level 1 (Easy)</div>
+                <div class="select-items select-hide">
+                    <div data-val="1">Level 1 (Easy)</div>
+                    <div data-val="2">Level 2 (Medium)</div>
+                    <div data-val="3">Level 3 (Hard)</div>
+                </div>
+            </div>
+        </div>
+
         <!-- Header / Weight Table -->
         <header>
             <div class="stats">
-                <div class="stat-pill custom-select" id="custom-level-select">
-                    <div class="select-selected">Level 1 (Easy)</div>
-                    <div class="select-items select-hide">
-                        <div data-val="1">Level 1 (Easy)</div>
-                        <div data-val="2">Level 2 (Medium)</div>
-                        <div data-val="3">Level 3 (Hard)</div>
-                    </div>
-                </div>
+
                 
                 <div class="theme-controls">
                     <button id="base-theme-toggle" class="fancy-btn small base-theme-toggle-btn">Light Mode</button>
@@ -71,7 +76,7 @@
 
             <!-- The Word Slots -->
             <div class="game-board" id="game-board">
-                <!-- 8 slots for creating the word -->
+                <!-- 15 slots for creating the word -->
                 <div class="slot" data-index="1"></div>
                 <div class="slot" data-index="2"></div>
                 <div class="slot" data-index="3"></div>
@@ -80,6 +85,13 @@
                 <div class="slot" data-index="6"></div>
                 <div class="slot" data-index="7"></div>
                 <div class="slot" data-index="8"></div>
+                <div class="slot" data-index="9"></div>
+                <div class="slot" data-index="10"></div>
+                <div class="slot" data-index="11"></div>
+                <div class="slot" data-index="12"></div>
+                <div class="slot" data-index="13"></div>
+                <div class="slot" data-index="14"></div>
+                <div class="slot" data-index="15"></div>
             </div>
 
             <div class="controls">

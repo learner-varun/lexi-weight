@@ -364,16 +364,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function getOrdinal(n) {
+        const s = ["th", "st", "nd", "rd"];
+        const v = n % 100;
+        return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    }
+
     function updateRulesDisplay() {
-        let rule = `Level ${currentLevel}: `;
-        if (currentLevel === 1) {
-            rule += `1st letter at pos 1. 2nd letter at pos 2 or 3.`;
-        } else if (currentLevel === 2) {
-            rule += `1st letter at pos 1. 2nd at 2 or 3. 3rd at 3 or 4.`;
-        } else if (currentLevel === 3) {
-            rule += `1st letter at pos 1. 2nd at 2 or 3. 3rd at 3 or 4. 4th at 4 or 5.`;
+        let rules = [`1st letter at slot 1`];
+        for (let i = 1; i < requiredLetters.length; i++) {
+            rules.push(`${getOrdinal(i + 1)} letter at slot ${i + 1} or ${i + 2}`);
         }
-        rulesText.textContent = rule;
+        rulesText.innerHTML = `<span style="opacity: 0.85; font-size: 0.9em;">Include these letters in order:</span><br><strong>${rules.join('. ')}.</strong>`;
 
         requiredLettersDisplay.innerHTML = '';
         requiredLetters.forEach((char, idx) => {
@@ -442,7 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 winStreak = 0;
                 document.getElementById('score-list').innerHTML = '';
                 document.getElementById('side-total-score').textContent = '0';
-                startLevel(1);
+                startLevel(currentLevel);
             },
             true
         );
@@ -460,7 +462,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 winStreak = 0;
                 document.getElementById('score-list').innerHTML = '';
                 document.getElementById('side-total-score').textContent = '0';
-                startLevel(1);
+                startLevel(currentLevel);
             },
             true
         );
@@ -536,11 +538,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Find where this required letter is.
             // Wait, the rule says "First alphabet should be used as starting letter"
             // Let's enforce strict positioning for the required letters in sequence.
-            let validPositions = [];
-            if (i === 0) validPositions = [1];
-            else if (i === 1) validPositions = [2, 3];
-            else if (i === 2) validPositions = [3, 4];
-            else if (i === 3) validPositions = [4, 5];
+            let validPositions = (i === 0) ? [1] : [i + 1, i + 2];
 
             // Does the word have the required letter at one of these positions?
             let foundValid = false;
@@ -631,10 +629,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <li><strong>Required Letters:</strong> Levels provide mandatory letters that you MUST include.</li>
                     <li><strong>Strict Placement:</strong> As levels get harder, you must place these letters in specific positions:
                         <ul style="margin-left: 1.5rem; margin-top: 0.25rem; font-size: 0.9em; opacity: 0.9; margin-bottom: 0.5rem;">
-                            <li><strong>1st Letter:</strong> Always at Position 1.</li>
-                            <li><strong>2nd Letter:</strong> Must be at Position 2 or 3.</li>
-                            <li><strong>3rd Letter:</strong> Must be at Position 3 or 4.</li>
-                            <li><strong>4th Letter:</strong> Must be at Position 4 or 5.</li>
+                            <li><strong>1st Letter:</strong> Always at Slot 1.</li>
+                            <li><strong>2nd Letter:</strong> Must be at Slot 2 or 3.</li>
+                            <li><strong>nth Letter:</strong> Must be at Slot n or n+1. (This pattern continues infinitely as levels get harder!)</li>
                         </ul>
                     </li>
                     <li><strong>Controls:</strong> Drag & drop, click, or type on your keyboard. Press <code>Backspace</code> to delete.</li>
