@@ -755,7 +755,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const file = new File([blob], 'lexiweight_score.png', { type: 'image/png' });
             const shareData = {
                 title: 'LexiWeight Score',
-                text: `I reached Level ${currentLevel} with a score of ${score} and a ${winStreak} win streak in LexiWeight! Can you beat me? Play here: https://learner-varun.github.io/word_challange/`,
+                text: `I reached Level ${currentLevel} with a score of ${score} and a ${winStreak} win streak in LexiWeight! Can you beat me? Play here: https://learner-varun.github.io/lexi-weight/`,
             };
 
             if (navigator.canShare && navigator.canShare({ files: [file] })) {
