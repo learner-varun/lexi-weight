@@ -559,6 +559,21 @@ main {
     background: rgba(255,255,255,0.05);
 }
 
+.fancy-btn.share-btn {
+    background: linear-gradient(45deg, #1da1f2, #bc13fe);
+    box-shadow: 0 0 15px rgba(29, 161, 242, 0.4);
+}
+
+.fancy-btn.share-btn:hover {
+    background: linear-gradient(45deg, #bc13fe, #1da1f2);
+    box-shadow: 0 0 20px rgba(188, 19, 254, 0.6);
+}
+
+.fancy-btn.share-btn.hidden {
+    display: none;
+}
+
+
 .fancy-btn.small {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LexiWeight - The Word Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
     <!-- PostHog Analytics -->
@@ -132,11 +133,17 @@
 
     <!-- Modals -->
     <div id="overlay" class="overlay hidden"></div>
+    
     <div id="modal" class="modal hidden">
         <h2 id="modal-title">Level Complete!</h2>
         <p id="modal-desc">Word weight: 42</p>
-        <button id="modal-action-btn" class="fancy-btn primary">Next Level</button>
+        <div class="modal-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+            <button id="modal-action-btn" class="fancy-btn primary">Next Level</button>
+            <button id="share-btn" class="fancy-btn share-btn hidden">📤 Share Result</button>
+        </div>
     </div>
+
+
 
     <script src="script.js"></script>
 </body>

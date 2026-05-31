@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalTitle = document.getElementById('modal-title');
     const modalDesc = document.getElementById('modal-desc');
     const modalActionBtn = document.getElementById('modal-action-btn');
+    const shareBtn = document.getElementById('share-btn');
 
     // Game State
     let currentLevel = 1;
@@ -85,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.addEventListener('click', handleSubmit);
         clearBtn.addEventListener('click', clearBoard);
         modalActionBtn.addEventListener('click', handleModalAction);
+        if (shareBtn) shareBtn.addEventListener('click', handleShare);
 
         // Setup Keyboard support
         document.addEventListener('keydown', handleKeyDown);
@@ -446,6 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('side-total-score').textContent = '0';
                 startLevel(currentLevel);
             },
+            true,
             true
         );
     }
@@ -464,6 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('side-total-score').textContent = '0';
                 startLevel(currentLevel);
             },
+            true,
             true
         );
     }
@@ -660,11 +664,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Modal Handling
     let modalActionCallback = null;
 
-    function showModal(title, desc, btnText, callback, isFailed = false) {
+    function showModal(title, desc, btnText, callback, isFailed = false, showShare = false) {
         modalTitle.innerHTML = title;
         modalDesc.innerHTML = desc;
         modalActionBtn.textContent = btnText;
         modalActionCallback = callback;
+        
+        const isMobile = window.innerWidth <= 768;
+        if (showShare && shareBtn && isMobile) {
+            shareBtn.classList.remove('hidden');
+        } else if (shareBtn) {
+            shareBtn.classList.add('hidden');
+        }
         
         if (isFailed) {
             modal.classList.add('error-modal');
@@ -685,6 +696,94 @@ document.addEventListener('DOMContentLoaded', () => {
         hideModal();
         if (modalActionCallback) {
             modalActionCallback();
+        }
+    }
+
+    async function handleShare() {
+        if (!shareBtn) return;
+        const originalText = shareBtn.textContent;
+        shareBtn.textContent = "Generating...";
+        shareBtn.disabled = true;
+
+        try {
+            // Generate canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = 800;
+            canvas.height = 418; // Twitter aspect ratio approx
+            const ctx = canvas.getContext('2d');
+
+            // Draw Background
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#0a0f1a');
+            gradient.addColorStop(1, '#1a1025');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Glow
+            const glow = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, 400);
+            glow.addColorStop(0, 'rgba(188, 19, 254, 0.2)');
+            glow.addColorStop(1, 'transparent');
+            ctx.fillStyle = glow;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Border
+            ctx.strokeStyle = '#bc13fe';
+            ctx.lineWidth = 10;
+            ctx.strokeRect(5, 5, canvas.width - 10, canvas.height - 10);
+
+            // Draw Text
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'center';
+            
+            ctx.font = 'bold 60px Outfit, sans-serif';
+            ctx.fillText('LexiWeight', canvas.width/2, 90);
+            
+            ctx.fillStyle = '#00ffcc';
+            ctx.font = 'bold 40px Outfit, sans-serif';
+            ctx.fillText(`Level: ${currentLevel}  |  Score: ${score}`, canvas.width/2, 170);
+            
+            ctx.fillStyle = '#ff007f';
+            ctx.font = 'bold 55px Outfit, sans-serif';
+            ctx.fillText(`${winStreak} Win Streak!`, canvas.width/2, 260);
+
+            ctx.fillStyle = '#8892b0';
+            ctx.font = '30px Outfit, sans-serif';
+            ctx.fillText('Can you beat my score?', canvas.width/2, 340);
+
+            // Convert to blob synchronously using Promise to preserve user gesture
+            const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+            const file = new File([blob], 'lexiweight_score.png', { type: 'image/png' });
+            const shareData = {
+                title: 'LexiWeight Score',
+                text: `I reached Level ${currentLevel} with a score of ${score} and a ${winStreak} win streak in LexiWeight! Can you beat me? Play here: https://learner-varun.github.io/word_challange/`,
+            };
+
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                shareData.files = [file];
+                await navigator.share(shareData);
+            } else {
+                // Fallback: download image and copy text
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'lexiweight_score.png';
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                navigator.clipboard.writeText(shareData.text).then(() => {
+                    alert("Image downloaded! Share text copied to clipboard.");
+                }).catch(() => {
+                    alert("Image downloaded!");
+                });
+            }
+            
+            shareBtn.textContent = originalText;
+            shareBtn.disabled = false;
+
+        } catch (err) {
+            console.error(err);
+            shareBtn.textContent = originalText;
+            shareBtn.disabled = false;
         }
     }
 
